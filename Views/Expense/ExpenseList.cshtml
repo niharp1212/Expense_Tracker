@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "ExpenseList";
+}
+
+<h2 class="text-center">Expense List</h2>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>@TempData["msg"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["denger"] != null)
+{
+    <div class="alert alert-danger">
+        <strong></strong>@TempData["denger"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category Name</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+     </thead>
+
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("ExpenseDelete", "Expense", new { @id = item.exData.ExpenseId }, FormMethod.Post))
+            {
+                <tr>
+                    <td>@item.exData.Title</td>
+                    <td>@item.exData.Description</td>
+                    <td>@item.exData.Amount</td>
+                    <td>@item.category.CategoryName</td>
+                    <td>@item.exData.date_and_time</td>
+                    <td>
+                        <a href="@Url.Action("ExpenseEdit", new { id = item.exData.ExpenseId })" class="btn btn-success">Edit</a>
+
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure want to delete @item.exData.Title Expense' );" />
+                        @* <a href="@Url.Action("ExpenseDelete", new { id = item.exData.ExpenseId })" class="btn btn-danger" >Delete</a>*@
+                    </td>
+                </tr>
+            }
+
+        }
+</table>

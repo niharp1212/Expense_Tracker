@@ -1,0 +1,59 @@
+﻿@model Expense.Models.Category
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2 class="text-center"
+    >Add Category</h2>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>@TempData["msg"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["denger"] != null)
+{
+    <div class="alert alert-danger">
+        <strong></strong>@TempData["denger"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+@using (Html.BeginForm("AddCategory", "Expense", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <label>Category Name</label>
+            @Html.ValidationMessageFor(h => h.CategoryName, "", new { @class = "error" })
+            @Html.TextBoxFor(h => h.CategoryName, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>
+                Category
+                Expanse Limit
+            </label>
+            @Html.ValidationMessageFor(h => h.Cexpense_limit, "", new { @class = "error" })
+            @Html.TextBoxFor(h => h.Cexpense_limit, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+

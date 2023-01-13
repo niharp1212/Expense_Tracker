@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @* @Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>*@
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/Expense.css" rel="stylesheet" />
+    <style>
+        h4{
+            color:white;
+        }
+    </style>
+   
+</head>
+
+<body>
+   
+  
+    <div class="menu-bar">
+        @*<h1 class="logo">Light<span>Code.</span></h1>*@
+        <h4>Expense Tracker</h4>
+        <ul>
+            <li>@Html.ActionLink("Dashboard", "Deshboard", "Expense")</li>
+
+            <li>
+                <a href="#">Category<i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li>@Html.ActionLink("Add Category", "Category", "Expense")</li>
+                        <li>@Html.ActionLink("Category List", "CategoryList", "Expense")</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#">Expense<i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li>@Html.ActionLink("Add Expense", "ExpenseC", "Expense")</li>
+                        <li>@Html.ActionLink("Expense List", "ExpenseList", "Expense")</li>
+                    </ul>
+                </div>
+            </li>
+            <li>@Html.ActionLink("Total Limit", "Totallimit", "Expense")</li>
+            <li>
+                <a href="#">API<i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li> <a href="https://localhost:44376/api/CategoryAPI/Get" target="_blank">All Category</a></li>
+                        <li> <a href="https://localhost:44376/api/CategoryAPI/Get/1" target="_blank">specific Category</a></li>
+                        <li> <a href="https://localhost:44376/api/ExpenseAPI/Get" target="_blank">All Expense</a></li>
+                        <li> <a href="https://localhost:44376/api/ExpenseAPI/Get/7" target="_blank">specific Expense</a></li>
+                        <li> <a href="https://localhost:44376/api/ExpenseAPI/CategoryVise/1" target="_blank">Expense by category Id</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p class="text-center">&copy; @DateTime.Now.Year Expense Tracker</p>
+                @* <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+            </footer>
+        </div>
+    
+       <script>
+           $(document).ready(function () {
+
+               // Loop through each nav item
+               $('nav.navbar').children('ul.nav').children('li').each(function (indexCount) {
+
+                   // loop through each dropdown, count children and apply a animation delay based on their index value
+                   $(this).children('ul.dropdown').children('li').each(function (index) {
+
+                       // Turn the index value into a reasonable animation delay
+                       var delay = 0.1 + index * 0.03;
+
+                       // Apply the animation delay
+                       $(this).css("animation-delay", delay + "s")
+                   });
+               });
+           })
+       </script>   
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        @RenderSection("scripts", required: false)
+</body>
+</html>
